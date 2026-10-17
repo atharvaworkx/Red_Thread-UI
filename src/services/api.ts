@@ -4,7 +4,11 @@ import {
   SystemHealth,
 } from '../types';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL || '/api';
+const rawBase = (import.meta.env.VITE_API_URL || import.meta.env.VITE_API_BASE_URL || '').trim();
+const cleanBase = rawBase.replace(/\/+$/, '');
+export const API_BASE = cleanBase
+  ? (cleanBase.endsWith('/api') ? cleanBase : `${cleanBase}/api`)
+  : '/api';
 
 async function handleResponse<T>(res: Response): Promise<T> {
   if (!res.ok) {

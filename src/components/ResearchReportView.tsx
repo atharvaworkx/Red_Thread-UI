@@ -20,6 +20,7 @@ import {
   CheckCircle2
 } from 'lucide-react';
 import { ResearchReport, Source } from '../types';
+import { API_BASE } from '../services/api';
 
 interface ResearchReportViewProps {
   report: ResearchReport | null;
@@ -146,7 +147,7 @@ export const ResearchReportView: React.FC<ResearchReportViewProps> = ({
     }
     try {
       setIsDownloadingPDF(true);
-      const res = await fetch(`/api/investigations/${investigationId}/export-pdf/`);
+      const res = await fetch(`${API_BASE}/investigations/${investigationId}/export-pdf/`);
       if (!res.ok) {
         throw new Error('PDF export failed');
       }
