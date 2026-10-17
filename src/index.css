@@ -1,0 +1,211 @@
+:root {
+  --bg-app: #080a0f;
+  --bg-surface: #0f131a;
+  --bg-surface-elevated: #161b24;
+  --bg-surface-hover: #1d2432;
+  --bg-glass: rgba(15, 19, 26, 0.85);
+  
+  --border-subtle: #222938;
+  --border-medium: #303a4e;
+  --border-active: #e53935;
+  
+  --text-main: #f1f5f9;
+  --text-dim: #94a3b8;
+  --text-muted: #64748b;
+  --text-highlight: #ffffff;
+  
+  --red-primary: #e53935;
+  --red-hover: #ef4444;
+  --red-subtle: rgba(229, 57, 53, 0.12);
+  --red-glow: rgba(229, 57, 53, 0.25);
+  --red-border: rgba(229, 57, 53, 0.35);
+
+  --status-supported-bg: rgba(16, 185, 129, 0.12);
+  --status-supported-border: rgba(16, 185, 129, 0.35);
+  --status-supported-text: #34d399;
+
+  --status-disputed-bg: rgba(245, 158, 11, 0.12);
+  --status-disputed-border: rgba(245, 158, 11, 0.35);
+  --status-disputed-text: #fbbf24;
+
+  --status-single-bg: rgba(59, 130, 246, 0.12);
+  --status-single-border: rgba(59, 130, 246, 0.35);
+  --status-single-text: #60a5fa;
+
+  --status-unverified-bg: rgba(139, 92, 246, 0.12);
+  --status-unverified-border: rgba(139, 92, 246, 0.35);
+  --status-unverified-text: #a78bfa;
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+  
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-app);
+  color: var(--text-main);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-app);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-sm);
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--red-primary);
+}
+
+/* Typography elements */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text-highlight);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+code, pre, .mono {
+  font-family: var(--font-mono);
+}
+
+/* Red thread accent line utility */
+.red-thread-marker {
+  position: relative;
+}
+.red-thread-marker::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background-color: var(--red-primary);
+  box-shadow: 0 0 8px var(--red-glow);
+}
+
+/* Global button styles */
+button {
+  font-family: var(--font-sans);
+  cursor: pointer;
+  border: none;
+  background: transparent;
+  color: inherit;
+  transition: all 0.15s ease-in-out;
+}
+
+/* Citation key badge [S1], [S2] */
+.citation-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  background: var(--red-subtle);
+  border: 1px solid var(--red-border);
+  color: #ff6b6b;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  margin: 0 2px;
+  transition: all 0.15s ease;
+}
+.citation-badge:hover {
+  background: var(--red-primary);
+  color: #ffffff;
+  box-shadow: 0 0 8px var(--red-glow);
+}
+
+/* Investigation status badge */
+.badge-status {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.badge-status.COMPLETED {
+  background: var(--status-supported-bg);
+  color: var(--status-supported-text);
+  border: 1px solid var(--status-supported-border);
+}
+.badge-status.RUNNING {
+  background: rgba(229, 57, 53, 0.15);
+  color: #ff5252;
+  border: 1px solid var(--red-border);
+  animation: pulse-border 1.5s infinite;
+}
+.badge-status.PENDING {
+  background: rgba(148, 163, 184, 0.15);
+  color: var(--text-dim);
+  border: 1px solid var(--border-medium);
+}
+.badge-status.FAILED {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.4);
+}
+
+@keyframes pulse-border {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 4px rgba(229, 57, 53, 0.1);
+  }
+}
+
+@keyframes highlight-glow {
+  0% {
+    box-shadow: 0 0 0 0 rgba(229, 57, 53, 0.8);
+    border-color: #ef4444;
+  }
+  30% {
+    box-shadow: 0 0 30px 8px rgba(229, 57, 53, 0.5);
+    border-color: #ff6b6b;
+  }
+  70% {
+    box-shadow: 0 0 15px 4px rgba(229, 57, 53, 0.3);
+    border-color: #ef4444;
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(229, 57, 53, 0);
+  }
+}
+
+.highlight-target {
+  animation: highlight-glow 2.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  border-color: rgba(229, 57, 53, 0.85) !important;
+  transition: border-color 0.4s ease;
+}
+
